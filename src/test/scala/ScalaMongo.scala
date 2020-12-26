@@ -2,6 +2,8 @@ import java.util.concurrent.TimeUnit
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 import org.mongodb.scala._
+import org.mongodb.scala.model.Filters._
+import org.mongodb.scala.model.Projections
 
 object ScalaMongo extends App {
 
@@ -31,6 +33,8 @@ object ScalaMongo extends App {
   val collection: MongoCollection[Document] =database.getCollection("jobs");
   val doc: Document = Document("_id" -> 0, "name" -> "MongoDB", "type" -> "database","count" -> 1, "info" -> Document("x" -> 203, "y"-> 102))
 
-  collection.deleteOne(doc).results();    //Using the results() implicit we block until the observer is completed
+  //collection.deleteOne(doc).results();    //Using the results() implicit we block until the observer is completed
+
+  val jobs = collection.find(equal("city", "Hyderabad")).printResults()
 
 }
