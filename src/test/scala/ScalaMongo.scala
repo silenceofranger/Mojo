@@ -32,13 +32,25 @@ object ScalaMongo extends App {
   val database: MongoDatabase = mongoClient.getDatabase("test")
   val collection: MongoCollection[Document] =database.getCollection("jobs");
   //val doc: Document = Document("_id" -> 0, "name" -> "MongoDB", "type" -> "database","count" -> 1, "info" -> Document("x" -> 203, "y"-> 102))
-
+  //DELETION
   //collection.deleteOne(doc).results();    //Using the results() implicit we block until the observer is completed
+  //INSERTION
+  //collection.insertOne(doc).results();
   println("LIST OF JOBS AVAILABLE IN HYDERABAD CITY")
   val jobsInHyderbad = collection.find(equal("city", "Hyderabad")).printResults()
   println("LIST OF JOBS AVIALABLE IN LONDON CITY")
   val jobsInLondon = collection.find(equal("city","London")).printHeadResult()
   println("LIST OF JOBS AVAILABLE IN REDWOOD CITY")
   val jobsInRedwood = collection.find(equal("city", "Redwood City")).printResults()
+  println("JOBS WHERE CITY IS REDWOOD AND TITLE IS HR MANAGER")
+  val jobsInRedwoodTitleHR = collection.find(and(equal("city","Redwood City"),
+    equal("title", "HR MANAGER"))).printResults()
+
+//  val insertAndCount = for {
+//    insertResult <- insertObservable
+//    countResult <- collection.count()
+//  } yield countResult
+//
+//  println(s"total # of documents after inserting 100 small ones (should be 101):  ${insertAndCount.headResult()}")
 
 }
