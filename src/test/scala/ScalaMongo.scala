@@ -31,10 +31,14 @@ object ScalaMongo extends App {
   val mongoClient: MongoClient = MongoClient("mongodb://localhost:27017/")
   val database: MongoDatabase = mongoClient.getDatabase("test")
   val collection: MongoCollection[Document] =database.getCollection("jobs");
-  val doc: Document = Document("_id" -> 0, "name" -> "MongoDB", "type" -> "database","count" -> 1, "info" -> Document("x" -> 203, "y"-> 102))
+  //val doc: Document = Document("_id" -> 0, "name" -> "MongoDB", "type" -> "database","count" -> 1, "info" -> Document("x" -> 203, "y"-> 102))
 
   //collection.deleteOne(doc).results();    //Using the results() implicit we block until the observer is completed
-
-  val jobs = collection.find(equal("city", "Hyderabad")).printResults()
+  println("LIST OF JOBS AVAILABLE IN HYDERABAD CITY")
+  val jobsInHyderbad = collection.find(equal("city", "Hyderabad")).printResults()
+  println("LIST OF JOBS AVIALABLE IN LONDON CITY")
+  val jobsInLondon = collection.find(equal("city","London")).printHeadResult()
+  println("LIST OF JOBS AVAILABLE IN REDWOOD CITY")
+  val jobsInRedwood = collection.find(equal("city", "Redwood City")).printResults()
 
 }
