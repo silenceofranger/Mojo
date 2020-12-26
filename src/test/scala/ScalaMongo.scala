@@ -45,7 +45,9 @@ object ScalaMongo extends App {
   println("JOBS WHERE CITY IS REDWOOD AND TITLE IS HR MANAGER")
   val jobsInRedwoodTitleHR = collection.find(and(equal("city","Redwood City"),
     equal("title", "HR MANAGER"))).printResults()
-
+  println("JOBS WHERE CITY IS HYDERABAD AND JOB IS UX DESIGNER")
+  val jobsInHyderabadUX = collection.find(and(equal("city","Hyderabad"),
+    equal("title", "UX DESIGNER"))).printResults()
 //  val insertAndCount = for {
 //    insertResult <- insertObservable
 //    countResult <- collection.count()
