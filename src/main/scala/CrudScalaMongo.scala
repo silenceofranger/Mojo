@@ -6,7 +6,7 @@ import org.mongodb.scala.model.Filters._
 import org.mongodb.scala.model.Projections
 import org.mongodb.scala.model.Updates._
 
-object ScalaMongo extends App {
+object CrudScalaMongo extends App {
 
   implicit class DocumentObservable[C](val observable: Observable[Document]) extends ImplicitObservable[Document] {
     override val converter: (Document) => String = (doc) => doc.toJson
@@ -32,11 +32,13 @@ object ScalaMongo extends App {
   val mongoClient: MongoClient = MongoClient("mongodb://localhost:27017/")
   val database: MongoDatabase = mongoClient.getDatabase("test")
   val collection: MongoCollection[Document] =database.getCollection("jobs");
+
   //val doc: Document = Document("_id" -> 0, "name" -> "MongoDB", "type" -> "database","count" -> 1, "info" -> Document("x" -> 203, "y"-> 102))
   //DELETION
   //collection.deleteOne(doc).results();    //Using the results() implicit we block until the observer is completed
   //INSERTION
   //collection.insertOne(doc).results();
+
   println("LIST OF JOBS AVAILABLE IN HYDERABAD CITY")
   val jobsInHyderbad = collection.find(equal("city", "Hyderabad")).printResults()
   println("LIST OF JOBS AVIALABLE IN LONDON CITY")
@@ -52,21 +54,21 @@ object ScalaMongo extends App {
 
 
   //INSERTION
-  val document: Document = Document("_id" -> 188, "x" -> 1)
+  val document: Document = Document("_id" -> 1000, "x" -> 2000)
   val insertObservable: Observable[Completed] = collection.insertOne(document)
 
-//  insertObservable.subscribe(new Observer[Completed] {
-//    override def onNext(result: Completed): Unit = println(s"onNext: $result")
-//    override def onError(e: Throwable): Unit = println(s"onError: $e")
-//    override def onComplete(): Unit = println("onComplete")
-//  })
+  insertObservable.subscribe(new Observer[Completed] {
+    override def onNext(result: Completed): Unit = println(s"onNext: $result")
+    override def onError(e: Throwable): Unit = println(s"onError: $e")
+    override def onComplete(): Unit = println("onComplete")
+  })
 
 
   //  UPDATION
-//  collection.updateOne(equal("_id", 188), set("_id", 110)).printHeadResult("Update Result: ")
+  //  collection.updateOne(equal("_id", 188), set("_id", 110)).printHeadResult("Update Result: ")
 
-//    DELETION
-//  collection.deleteOne(equal("_id", 1)).printHeadResult("Delete Result: ")
+  //    DELETION
+  //  collection.deleteOne(equal("_id", 1)).printHeadResult("Delete Result: ")
 
 
 }
