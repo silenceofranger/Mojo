@@ -71,4 +71,5 @@ object CrudScalaMongo extends App {
   //  collection.deleteOne(equal("_id", 1)).printHeadResult("Delete Result: ")
 
 
+
 }
