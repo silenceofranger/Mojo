@@ -4,6 +4,7 @@ import scala.concurrent.duration.Duration
 import org.mongodb.scala._
 import org.mongodb.scala.model.Filters._
 import org.mongodb.scala.model.Projections
+import org.mongodb.scala.model.Updates._
 
 object ScalaMongo extends App {
 
@@ -48,11 +49,24 @@ object ScalaMongo extends App {
   println("JOBS WHERE CITY IS HYDERABAD AND JOB IS UX DESIGNER")
   val jobsInHyderabadUX = collection.find(and(equal("city","Hyderabad"),
     equal("title", "UX DESIGNER"))).printResults()
-//  val insertAndCount = for {
-//    insertResult <- insertObservable
-//    countResult <- collection.count()
-//  } yield countResult
-//
-//  println(s"total # of documents after inserting 100 small ones (should be 101):  ${insertAndCount.headResult()}")
+
+
+  //INSERTION
+  val document: Document = Document("_id" -> 188, "x" -> 1)
+  val insertObservable: Observable[Completed] = collection.insertOne(document)
+
+//  insertObservable.subscribe(new Observer[Completed] {
+//    override def onNext(result: Completed): Unit = println(s"onNext: $result")
+//    override def onError(e: Throwable): Unit = println(s"onError: $e")
+//    override def onComplete(): Unit = println("onComplete")
+//  })
+
+
+  //  UPDATION
+//  collection.updateOne(equal("_id", 188), set("_id", 110)).printHeadResult("Update Result: ")
+
+//    DELETION
+//  collection.deleteOne(equal("_id", 1)).printHeadResult("Delete Result: ")
+
 
 }
