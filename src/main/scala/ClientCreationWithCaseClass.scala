@@ -68,8 +68,6 @@ object ClientCreationWithCaseClass extends App {
     collection.updateOne(equal("inboundFeedUrl", "url3"), set("inboundFeedUrl", "url33")).printHeadResult("Update Result: ")
 
     collection.deleteOne(equal("name", "client4")).printHeadResult("Delete Result: ")
-  
-//    collection.drop().results()
 
     mongoClient.close()
 
