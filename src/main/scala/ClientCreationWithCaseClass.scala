@@ -52,12 +52,12 @@ object ClientCreationWithCaseClass extends App {
     // READING
     collection.find.first().printResults()
 
-    val people: Seq[Client] = Seq(
+    val clients: Seq[Client] = Seq(
       Client("client2", "url2"),
       Client("client3", "url3"),
       Client("client4", "url4")
     )
-    collection.insertMany(people).printResults()
+    collection.insertMany(clients).printResults()
 
 
     collection.find().first().printHeadResult()
