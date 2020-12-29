@@ -59,9 +59,7 @@ object ClientCreationWithCaseClass extends App {
     )
     collection.insertMany(clients).printResults()
 
-
     collection.find().first().printHeadResult()
-
 
     collection.find(equal("name", "client3")).first().printHeadResult()
 
@@ -70,6 +68,5 @@ object ClientCreationWithCaseClass extends App {
     collection.deleteOne(equal("name", "client4")).printHeadResult("Delete Result: ")
 
     mongoClient.close()
-
 
 }
